@@ -16,6 +16,7 @@ pygame.display.set_icon(icon)
 playerImg = pygame.image.load('player.png')
 playerX = 370
 playerY = 480
+playerX_change = 0
 
 def player(x, y):
     screen.blit(playerImg, (x, y))
@@ -29,9 +30,7 @@ while running:
 
     # RGB - Red, Green, Blue
     screen.fill((0, 0, 0))
-    playerY -= 0.1
-
-
+    
     # Captura todos os eventos que estão acontecendo no jogo (como cliques, teclas pressionadas, etc.)
     for event in pygame.event.get():  
         
@@ -40,7 +39,19 @@ while running:
             
             # Se o evento for de fechar a janela, define 'running' como False, encerrando o loop
             running = False
+        
+        # if keystroke is preesed check wheter its right or lft
+        if event.type == pygame.KEYDOWN:
+            print("A keystoke is pressed")
+            if event.key == pygame.K_LEFT:
+                playerX_change = -0.5
+            if event.key == pygame.K_RIGHT:
+                playerX_change = 0.5
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                playerX_change = 0
 
+    playerX += playerX_change
     player(playerX, playerY)
     pygame.display.update()
 
