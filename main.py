@@ -1,6 +1,9 @@
 # import pygame
 import pygame
 
+#import random
+import random
+
 # Inicializa o pygame
 pygame.init()
 
@@ -18,9 +21,19 @@ playerX = 370  # Posição inicial do jogador no eixo X
 playerY = 480  # Posição inicial do jogador no eixo Y
 playerX_change = 0  # Variável para controlar a mudança na posição X do jogador
 
+#Inimigo
+enemyImg = pygame.image.load('enemy.png')  
+enemyX = random.randint(0, 800)
+enemyY = random.randint(50, 150)
+enemyX_change = 0   
+
 # Função para desenhar o jogador na tela
 def player(x, y):
     screen.blit(playerImg, (x, y))  # Desenha o jogador na posição (x, y)
+
+# Função para desenhar o inimigo na tela
+def enemy(x, y):
+    screen.blit(enemyImg, (x, y))  # Desenha o inimigo na posição (x, y)
 
 # Loop do jogo
 running = True  # Variável de controle para manter o loop do jogo rodando
@@ -70,6 +83,9 @@ while running:
     
     # Chama a função para desenhar o jogador na nova posição
     player(playerX, playerY)
+
+    # Chama a função para desenhar o inimigo na nova posição
+    enemy(enemyX, enemyY)
     
     # Atualiza a tela
     pygame.display.update()
