@@ -25,7 +25,8 @@ playerX_change = 0  # Variável para controlar a mudança na posição X do joga
 enemyImg = pygame.image.load('enemy.png')  
 enemyX = random.randint(0, 800)
 enemyY = random.randint(50, 150)
-enemyX_change = 0   
+enemyX_change = 0.3   
+enemyY_change = 40
 
 # Função para desenhar o jogador na tela
 def player(x, y):
@@ -80,6 +81,17 @@ while running:
         playerX = 0
     elif playerX >= 736:
         playerX = 736
+
+    # Atualiza a posição do inimigo no eixo X
+    enemyX += enemyX_change
+
+    #limite de borda left e right
+    if enemyX <=0:
+        enemyX_change = 0.3
+        enemyY += enemyY_change
+    elif enemyX >= 736:
+        enemyX_change = -0.3
+        enemyY += enemyY_change
     
     # Chama a função para desenhar o jogador na nova posição
     player(playerX, playerY)
