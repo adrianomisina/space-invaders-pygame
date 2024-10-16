@@ -10,6 +10,9 @@ pygame.init()
 # Cria a tela
 screen = pygame.display.set_mode((800, 600))
 
+#background
+background = pygame.image.load('background.png')
+
 # Define o título e o ícone da janela
 pygame.display.set_caption("Space Invaders")
 icon = pygame.image.load('ufo.png')  # Carrega a imagem do ícone
@@ -25,7 +28,7 @@ playerX_change = 0  # Variável para controlar a mudança na posição X do joga
 enemyImg = pygame.image.load('enemy.png')  
 enemyX = random.randint(0, 800)
 enemyY = random.randint(50, 150)
-enemyX_change = 0.3   
+enemyX_change = 3   
 enemyY_change = 40
 
 # Função para desenhar o jogador na tela
@@ -44,6 +47,9 @@ while running:
 
     # Preenche a tela com a cor preta (RGB - Red, Green, Blue)
     screen.fill((0, 0, 0))
+
+    #background image
+    screen.blit(background,(0, 0))
     
     # Captura todos os eventos que estão acontecendo no jogo (como cliques, teclas pressionadas, etc.)
     for event in pygame.event.get():  
@@ -60,11 +66,11 @@ while running:
             
             # Se a tecla pressionada for a seta para a esquerda, move o jogador para a esquerda
             if event.key == pygame.K_LEFT:
-                playerX_change = -1.0
+                playerX_change = -5
             
             # Se a tecla pressionada for a seta para a direita, move o jogador para a direita
             if event.key == pygame.K_RIGHT:
-                playerX_change = 1.0
+                playerX_change = 5
         
         # Verifica se uma tecla foi solta
         if event.type == pygame.KEYUP:
@@ -87,10 +93,10 @@ while running:
 
     #limite de borda left e right
     if enemyX <=0:
-        enemyX_change = 0.3
+        enemyX_change = 3
         enemyY += enemyY_change
     elif enemyX >= 736:
-        enemyX_change = -0.3
+        enemyX_change = -3
         enemyY += enemyY_change
     
     # Chama a função para desenhar o jogador na nova posição
